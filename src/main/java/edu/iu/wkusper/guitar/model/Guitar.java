@@ -2,14 +2,14 @@ package edu.iu.wkusper.guitar.model;
 
 public class Guitar {
     private String serialNumber;
-    private Builder builder;
+    private String builder;
     private String model;
-    private Type type;
-    private Wood backWood;
-    private Wood topWood;
+    private String type;
+    private String backWood;
+    private String topWood;
     private double price;
 
-    public Guitar(String serialNumber, Builder builder, String model, Type type, Wood backWood, Wood topWood, double price) {
+    public Guitar(String serialNumber, String builder, String model, String type, String backWood, String topWood, double price) {
         this.serialNumber = serialNumber;
         this.builder = builder;
         this.model = model;
@@ -23,7 +23,7 @@ public class Guitar {
         return serialNumber;
     }
 
-    public Builder getBuilder() {
+    public String getBuilder() {
         return builder;
     }
 
@@ -31,15 +31,15 @@ public class Guitar {
         return model;
     }
 
-    public Type getType() {
+    public String getType() {
         return type;
     }
 
-    public Wood getBackWood() {
+    public String getBackWood() {
         return backWood;
     }
 
-    public Wood getTopWood() {
+    public String getTopWood() {
         return topWood;
     }
 
