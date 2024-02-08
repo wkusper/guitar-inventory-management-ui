@@ -1,4 +1,4 @@
-123,Fender,Stratocaster,electric,maple,alder,1499.99
-456,Gibson,Les Paul,electric,mahogany,mahogany,2499.99
-789,Martin,D-28,acoustic,rosewood,rosewood,2999.99
-101,Taylor,914ce,acoustic,rosewood,spruce,3999.99
+123,Fender,Stratocaster,electric,Maple,Alder,1499.99
+456,Gibson,Les Paul,electric,Mahogany,Mahogany,2499.99
+789,Martin,D-28,acoustic,Cocobolo,Cocobolo,2999.99
+101,Olson,914ce,acoustic,Cocobolo,Cedar,3999.99
