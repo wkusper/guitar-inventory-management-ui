@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        label, input, button {
+            margin-bottom: 10px;
+        }
+    </style>
+    <title>Add Guitar</title>
+</head>
+<body>
+    <label>Serial Number:</label>
+    <input id="serialNumber"/>
+    <label>Builder:</label>
+    <input id="builder"/>
+    <label>Model:</label>
+    <input id="model"/>
+    <label>Type:</label>
+    <input id="type"/>
+    <label>Back wood:</label>
+    <input id="backWood"/>
+    <label>Top wood:</label>
+    <input id="topWood"/>
+    <label>Price:</label>
+    <input id="price"/>
+    <button onclick="addGuitar()">Add guitar</button>
+
+    <script>
+        function addGuitar() {
+            let serialNumber = document.getElementById("serialNumber").value;
+            let builder = document.getElementById("builder").value;
+            let model = document.getElementById("model").value;
+            let type = document.getElementById("type").value;
+            let backWood = document.getElementById("backWood").value;
+            let topWood = document.getElementById("topWood").value;
+            let price = document.getElementById("price").value;
+
+            let message = "You entered:\n"
+                + "Serial Number: " + serialNumber + "\n"
+                + "Builder: " + builder + "\n"
+                + "Model: " + model + "\n"
+                + "Type: " + type + "\n"
+                + "Back Wood: " + backWood + "\n"
+                + "Top Wood: " + topWood + "\n"
+                + "Price: " + price;
+
+            alert(message);
+        }
+    </script>
+</body>

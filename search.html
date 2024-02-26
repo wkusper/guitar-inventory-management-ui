@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+
+        label, input, button {
+            margin-bottom: 10px;
+        }
+    </style>
+    <title>Guitar Search</title>
+</head>
+<body>
+    <label>Serial Number:</label>
+    <input id="searchSerialNumber"/>
+    <label>Builder:</label>
+    <input id="searchBuilder"/>
+    <label>Model:</label>
+    <input id="searchModel"/>
+    <label>Type:</label>
+    <input id="searchType"/>
+    <label>Back Wood:</label>
+    <input id="searchBackWood"/>
+    <label>Top Wood:</label>
+    <input id="searchTopWood"/>
+    <label>Price:</label>
+    <input id="searchPrice"/>
+    <button onclick="searchGuitar()">Search</button>
+
+    <table id="searchResults">
+        <thead>
+            <tr>
+                <th>Serial Number</th>
+                <th>Builder</th>
+                <th>Model</th>
+                <th>Type</th>
+                <th>Back Wood</th>
+                <th>Top Wood</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>SN001</td>
+                <td>Fender</td>
+                <td>Stratocaster</td>
+                <td>Electric</td>
+                <td>Alder</td>
+                <td>Maple</td>
+                <td>$1000</td>
+            </tr>
+            <tr>
+                <td>SN002</td>
+                <td>Gibson</td>
+                <td>Les Paul</td>
+                <td>Electric</td>
+                <td>Mahogany</td>
+                <td>Maple</td>
+                <td>$1200</td>
+            </tr>
+            <tr>
+                <td>SN003</td>
+                <td>Martin</td>
+                <td>D-28</td>
+                <td>Acoustic</td>
+                <td>Rosewood</td>
+                <td>Spruce</td>
+                <td>$1500</td>
+            </tr>
+            <tr>
+                <td>SN004</td>
+                <td>Taylor</td>
+                <td>814ce</td>
+                <td>Acoustic</td>
+                <td>Rosewood</td>
+                <td>Spruce</td>
+                <td>$2000</td>
+            </tr>
+            <tr>
+                <td>SN005</td>
+                <td>Ibanez</td>
+                <td>RG550</td>
+                <td>Electric</td>
+                <td>Basswood</td>
+                <td>Maple</td>
+                <td>$800</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        function searchGuitar() {
+            let searchSerialNumber = document.getElementById("searchSerialNumber").value.toLowerCase();
+            let searchBuilder = document.getElementById("searchBuilder").value.toLowerCase();
+            let searchModel = document.getElementById("searchModel").value.toLowerCase();
+            let searchType = document.getElementById("searchType").value.toLowerCase();
+            let searchBackWood = document.getElementById("searchBackWood").value.toLowerCase();
+            let searchTopWood = document.getElementById("searchTopWood").value.toLowerCase();
+            let searchPrice = document.getElementById("searchPrice").value.toLowerCase();
+
+            let table = document.getElementById("searchResults");
+            let rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                let found = false;
+                let cells = rows[i].getElementsByTagName("td");
+
+                if (cells[0].textContent.toLowerCase().includes(searchSerialNumber)
+                    && cells[1].textContent.toLowerCase().includes(searchBuilder)
+                    && cells[2].textContent.toLowerCase().includes(searchModel)
+                    && cells[3].textContent.toLowerCase().includes(searchType)
+                    && cells[4].textContent.toLowerCase().includes(searchBackWood)
+                    && cells[5].textContent.toLowerCase().includes(searchTopWood)
+                    && cells[6].textContent.toLowerCase().includes(searchPrice)) {
+                    found = true;
+                }
+
+                if (found) {
+                    rows[i].style.display = "";
+                } else {
+                    rows[i].style.display = "none";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
