@@ -37,7 +37,9 @@
     <button onclick="addGuitar()">Add guitar</button>
 
     <script>
-        function addGuitar() {
+        let host = "https://guitar-inventory-management-yc5a.onrender.com"; // Update this to your backend service URL
+
+        async function addGuitar() {
             let serialNumber = document.getElementById("serialNumber").value;
             let builder = document.getElementById("builder").value;
             let model = document.getElementById("model").value;
@@ -46,16 +48,37 @@
             let topWood = document.getElementById("topWood").value;
             let price = document.getElementById("price").value;
 
-            let message = "You entered:\n"
-                + "Serial Number: " + serialNumber + "\n"
-                + "Builder: " + builder + "\n"
-                + "Model: " + model + "\n"
-                + "Type: " + type + "\n"
-                + "Back Wood: " + backWood + "\n"
-                + "Top Wood: " + topWood + "\n"
-                + "Price: " + price;
+            let guitar = {
+                serialNumber: serialNumber,
+                builder: builder,
+                model: model,
+                type: type,
+                backWood: backWood,
+                topWood: topWood,
+                price: price
+            };
 
-            alert(message);
+            let request = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(guitar)
+            };
+
+            try {
+                let response = await fetch(host + "/guitar/add", request);
+                if (response.ok) {
+                    alert("Guitar added successfully!");
+                } else {
+                    console.error('Error adding guitar:', response.statusText);
+                    alert("Something went wrong! Guitar could not be added.");
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert("Something went wrong! An error occurred.");
+            }
         }
     </script>
 </body>
+</html>

@@ -61,87 +61,65 @@
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>SN001</td>
-                <td>Fender</td>
-                <td>Stratocaster</td>
-                <td>Electric</td>
-                <td>Alder</td>
-                <td>Maple</td>
-                <td>$1000</td>
-            </tr>
-            <tr>
-                <td>SN002</td>
-                <td>Gibson</td>
-                <td>Les Paul</td>
-                <td>Electric</td>
-                <td>Mahogany</td>
-                <td>Maple</td>
-                <td>$1200</td>
-            </tr>
-            <tr>
-                <td>SN003</td>
-                <td>Martin</td>
-                <td>D-28</td>
-                <td>Acoustic</td>
-                <td>Rosewood</td>
-                <td>Spruce</td>
-                <td>$1500</td>
-            </tr>
-            <tr>
-                <td>SN004</td>
-                <td>Taylor</td>
-                <td>814ce</td>
-                <td>Acoustic</td>
-                <td>Rosewood</td>
-                <td>Spruce</td>
-                <td>$2000</td>
-            </tr>
-            <tr>
-                <td>SN005</td>
-                <td>Ibanez</td>
-                <td>RG550</td>
-                <td>Electric</td>
-                <td>Basswood</td>
-                <td>Maple</td>
-                <td>$800</td>
-            </tr>
+        <!-- Rows will be dynamically added here -->
         </tbody>
     </table>
 
     <script>
-        function searchGuitar() {
-            let searchSerialNumber = document.getElementById("searchSerialNumber").value.toLowerCase();
-            let searchBuilder = document.getElementById("searchBuilder").value.toLowerCase();
-            let searchModel = document.getElementById("searchModel").value.toLowerCase();
-            let searchType = document.getElementById("searchType").value.toLowerCase();
-            let searchBackWood = document.getElementById("searchBackWood").value.toLowerCase();
-            let searchTopWood = document.getElementById("searchTopWood").value.toLowerCase();
-            let searchPrice = document.getElementById("searchPrice").value.toLowerCase();
+        let host = "https://guitar-inventory-management-yc5a.onrender.com"; // Update this to your backend service URL
 
-            let table = document.getElementById("searchResults");
-            let rows = table.getElementsByTagName("tr");
+        async function searchGuitar() {
+            let searchSerialNumber = document.getElementById("searchSerialNumber").value;
+            let searchBuilder = document.getElementById("searchBuilder").value;
+            let searchModel = document.getElementById("searchModel").value;
+            let searchType = document.getElementById("searchType").value;
+            let searchBackWood = document.getElementById("searchBackWood").value;
+            let searchTopWood = document.getElementById("searchTopWood").value;
+            let searchPrice = document.getElementById("searchPrice").value;
 
-            for (let i = 1; i < rows.length; i++) {
-                let found = false;
-                let cells = rows[i].getElementsByTagName("td");
+            let request = {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    serialNumber: searchSerialNumber,
+                    builder: searchBuilder,
+                    model: searchModel,
+                    type: searchType,
+                    backWood: searchBackWood,
+                    topWood: searchTopWood,
+                    price: searchPrice
+                })
+            };
 
-                if (cells[0].textContent.toLowerCase().includes(searchSerialNumber)
-                    && cells[1].textContent.toLowerCase().includes(searchBuilder)
-                    && cells[2].textContent.toLowerCase().includes(searchModel)
-                    && cells[3].textContent.toLowerCase().includes(searchType)
-                    && cells[4].textContent.toLowerCase().includes(searchBackWood)
-                    && cells[5].textContent.toLowerCase().includes(searchTopWood)
-                    && cells[6].textContent.toLowerCase().includes(searchPrice)) {
-                    found = true;
-                }
-
-                if (found) {
-                    rows[i].style.display = "";
+            try {
+                let response = await fetch(host + "/guitar/search", request);
+                if (response.ok) {
+                    let results = await response.json();
+                    displayResults(results);
                 } else {
-                    rows[i].style.display = "none";
+                    console.error('Error fetching data:', response.statusText);
                 }
+            } catch (error) {
+                console.error('Error:', error);
             }
+        }
+
+        function displayResults(guitars) {
+            let tableBody = document.getElementById("searchResults").getElementsByTagName("tbody")[0];
+            tableBody.innerHTML = ''; // Clear previous results
+
+            guitars.forEach(guitar => {
+                let row = tableBody.insertRow();
+                row.insertCell().textContent = guitar.serialNumber;
+                row.insertCell().textContent = guitar.builder;
+                row.insertCell().textContent = guitar.model;
+                row.insertCell().textContent = guitar.type;
+                row.insertCell().textContent = guitar.backWood;
+                row.insertCell().textContent = guitar.topWood;
+                row.insertCell().textContent = guitar.price;
+            });
         }
     </script>
 </body>
