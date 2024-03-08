@@ -1,0 +1,4 @@
+123,Fender,Stratocaster,electric,Maple,Alder,1499.99
+456,Gibson,Les Paul,electric,Mahogany,Mahogany,2499.99
+789,Martin,D-28,acoustic,Cocobolo,Cocobolo,2999.99
+101,Olson,914ce,acoustic,Cocobolo,Cedar,3999.99
